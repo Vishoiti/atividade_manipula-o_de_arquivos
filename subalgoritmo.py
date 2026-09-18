@@ -6,7 +6,7 @@ def exibir_menu():
         3 - Ler o arquivo
         4 - Editar o arquivo
         5 - Gravar arquivo exclusivo
-        """)
+        """)        
 
 def escolha_numero(c: dict) -> None:
     try:
@@ -38,11 +38,13 @@ def gravar_arquivo(c:dict) -> None:
     arquivo.close()
     print(f"\nO conteúdo: {texto} foi gravado com sucesso!")
 
-def ler_arquivo(c:str) -> None:
+def ler_arquivo(c:dict) -> None:
     try:
         arquivo = open(c["nome"], "r", encoding="utf-8")
     except KeyError:
         print("O programa não possui arquivos registrados para ler.")
+    except FileNotFoundError:
+        print("O arquivo ainda não foi criado, use a opção 2 primeiro.")
         return
     print("Conteúdo do arquivo: ")
     print('-' * 30)
@@ -61,3 +63,17 @@ def editar_arquivo(c: dict) -> None:
     arquivo.close()
     print("\nArquivo editado!")
     return novo_conteudo
+
+def arquivo_exclusivo(c:dict) -> None:
+    try:
+        arquivo = open(c["nome"], 'x', encoding="utf-8")
+    except KeyError:
+        print("Defina o nome do arquivo na opção 1!")
+        return
+    except FileExistsError:
+        print("Esse arquivo já existe! Essa opção cria apenas arquivos únicos.")
+        return
+    exclusivo = input("Conteúdo do arquivo exclusivo: ")
+    arquivo.write(f"{exclusivo}\n")
+    arquivo.close()
+    print("\nArquivo exclusivo registrado com sucesso!")

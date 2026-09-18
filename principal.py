@@ -1,7 +1,7 @@
 import os 
 os.system("cls")
 
-from subalgoritmo import exibir_menu, escolha_numero, nome_arquivo, gravar_arquivo, ler_arquivo, editar_arquivo
+from subalgoritmo import exibir_menu, escolha_numero, nome_arquivo, gravar_arquivo, ler_arquivo, editar_arquivo, arquivo_exclusivo
 
 conteudo = {}
 
@@ -19,4 +19,6 @@ while True:
         case 3:
             ler_arquivo(conteudo)
         case 4:
-            editar_arquivo(conteudo) 
+            editar_arquivo(conteudo)
+        case 5:
+            arquivo_exclusivo(conteudo)
