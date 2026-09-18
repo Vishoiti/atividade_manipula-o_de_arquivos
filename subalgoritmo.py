@@ -20,19 +20,19 @@ def escolha_numero(c: dict) -> None:
         print("ERRO!")
 
 
-def arquivo_vazio(c: dict) -> None:
-    vazio = "default"
-    arquivo = open(vazio + ".txt", "w", encoding="utf-8")
-    arquivo.write(vazio + "\n")
-    arquivo.close()
-    print("\nArquivo gravado com sucesso!")
-
 def nome_arquivo(c: dict) -> None:
     nome= input("Nome Do arquivo: ")
     if nome == "":
-        arquivo_vazio(c)
-    else:
-        arquivo = open(nome + ".txt", "w", encoding="utf-8")
-        arquivo.write(nome + "\n")
-        arquivo.close()
-        print("\nArquivo gravado com sucesso!")
+        nome = "default"
+    c["nome"] = nome +".txt"
+    print("\nO nome Foi salvo com sucesso!")
+
+def gravar_arquivo(c:dict) -> None:
+    if "nome" not in c:
+        print("Coloque o nome do arquivo na opção 1!")
+        return
+    texto = input("Digite o conteúdo do arquivo: ")
+    arquivo = open(c["nome"], "w", encoding="utf-8")
+    arquivo.write(texto + "\n")
+    arquivo.close()
+    print(f"\nO conteúdo: {texto} foi gravado com sucesso!")
