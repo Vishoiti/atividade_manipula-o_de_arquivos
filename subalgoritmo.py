@@ -36,3 +36,16 @@ def gravar_arquivo(c:dict) -> None:
     arquivo.write(texto + "\n")
     arquivo.close()
     print(f"\nO conteúdo: {texto} foi gravado com sucesso!")
+
+def ler_arquivo(c:str) -> None:
+    if "nome" not in c:
+        print("Nenhum arquivo Registrado.")
+        return
+    arquivo = open(c["nome"], "r", encoding="utf-8")
+    print("Conteúdo do arquivo: ")
+    print('-' * 30)
+    print(arquivo.read().strip())
+    print('-' * 30)
+    arquivo.close()
+
+    
