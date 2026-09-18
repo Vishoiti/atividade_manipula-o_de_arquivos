@@ -28,24 +28,36 @@ def nome_arquivo(c: dict) -> None:
     print("\nO nome Foi salvo com sucesso!")
 
 def gravar_arquivo(c:dict) -> None:
-    if "nome" not in c:
-        print("Coloque o nome do arquivo na opção 1!")
+    try:
+        arquivo = open(c["nome"], "w", encoding="utf-8")
+    except KeyError:
+        print("Você precisa definir o nome do arquivo na opção 1!")
         return
     texto = input("Digite o conteúdo do arquivo: ")
-    arquivo = open(c["nome"], "w", encoding="utf-8")
     arquivo.write(texto + "\n")
     arquivo.close()
     print(f"\nO conteúdo: {texto} foi gravado com sucesso!")
 
 def ler_arquivo(c:str) -> None:
-    if "nome" not in c:
-        print("Nenhum arquivo Registrado.")
+    try:
+        arquivo = open(c["nome"], "r", encoding="utf-8")
+    except KeyError:
+        print("O programa não possui arquivos registrados para ler.")
         return
-    arquivo = open(c["nome"], "r", encoding="utf-8")
     print("Conteúdo do arquivo: ")
     print('-' * 30)
     print(arquivo.read().strip())
     print('-' * 30)
     arquivo.close()
 
-    
+def editar_arquivo(c: dict) -> None:
+    try:
+        arquivo = open(c["nome"], "a", encoding="utf-8")
+    except KeyError:
+        print("Registre um arquivo antes!")
+        return
+    novo_conteudo = input("Conteúdo do arquivo: ")
+    arquivo.write(f"{novo_conteudo}\n") 
+    arquivo.close()
+    print("\nArquivo editado!")
+    return novo_conteudo
